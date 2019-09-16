@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':imageloaderlibrary'
 rootProject.name='Image Loader'
