@@ -4,6 +4,6 @@ import android.graphics.Bitmap
 
 interface ImageCache {
 
-    fun getCache(url: String?) : Bitmap?
-    fun putCache(url: String?, bitmap: Bitmap?)
+    fun getCache(url: String) : Bitmap?
+    fun putCache(url: String, bitmap: Bitmap)
 }

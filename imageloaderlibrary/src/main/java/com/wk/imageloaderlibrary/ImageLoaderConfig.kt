@@ -1,11 +1,10 @@
 package com.wk.imageloaderlibrary
 
-import com.wk.imageloaderlibrary.cache.ImageCache
-import com.wk.imageloaderlibrary.cache.MemoryCache
+import com.wk.imageloaderlibrary.cache.CacheManager.Companion.ALL_CACHE
 
 class ImageLoaderConfig {
     // 缓存策略
-    var mCache: ImageCache = MemoryCache()
+    var mCacheMode: Int = ALL_CACHE
         private set
     var threadCount = 0
         private set
@@ -21,15 +20,15 @@ class ImageLoaderConfig {
     private constructor()
 
     class Builder {
-        var mCache: ImageCache = MemoryCache()
+        var mCacheMode: Int = ALL_CACHE
         // 线程池
         var threadCount = Runtime.getRuntime().availableProcessors() + 1
         var errorImgId: Int = -1
         var url: String = "" // 要加载的网络图片链接
         var imgId: Int = -1 // 要加载的本地图片 ID
 
-        fun setCache(cache: ImageCache): Builder {
-            this.mCache = cache
+        fun setCache(cache: Int): Builder {
+            this.mCacheMode = cache
             return this
         }
 
@@ -53,13 +52,14 @@ class ImageLoaderConfig {
             return this
         }
 
-        fun build() {
+        fun build(): ImageLoaderConfig{
             val config = ImageLoaderConfig()
             config.errorImgId = this.errorImgId
             config.threadCount = this.threadCount
             config.imgId = this.imgId
             config.url = this.url
-            config.mCache = this.mCache
+            config.mCacheMode = this.mCacheMode
+            return config
         }
     }
 

@@ -8,7 +8,7 @@ class MemoryCache : ImageCache {
 
     lateinit var lruCache: LruCache<String, Bitmap>
 
-    constructor() {
+   init {
         initCache()
     }
 
@@ -22,17 +22,11 @@ class MemoryCache : ImageCache {
         }
     }
 
-    override fun getCache(url: String?): Bitmap? {
-        var bitmap: Bitmap? = null
-        if (CheckUtil.checkOb(url)) {
-            bitmap =  lruCache.get(url!!)
-        }
-        return bitmap
+    override fun getCache(url: String): Bitmap? {
+        return lruCache.get(url)
     }
 
-    override fun putCache(url: String?, bitmap: Bitmap?) {
-        if (CheckUtil.checkOb(url) && CheckUtil.checkOb(bitmap)) {
-            lruCache.put(url!!, bitmap!!)
-        }
+    override fun putCache(url: String, bitmap: Bitmap) {
+        lruCache.put(url, bitmap)
     }
 }
