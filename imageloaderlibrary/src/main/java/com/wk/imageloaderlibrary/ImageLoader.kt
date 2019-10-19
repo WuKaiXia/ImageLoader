@@ -48,7 +48,7 @@ class ImageLoader private constructor(context: Context) {
     private lateinit var config: ImageLoaderConfig
     private var mImageView: ImageView = ImageView(context)
 
-    private var mContext: Context = context
+    private var mContext: Context? = context
     fun initConfig(config: ImageLoaderConfig): ImageLoader {
         this.config = config
         mCacheManager.cacheMode = config.mCacheMode
@@ -88,6 +88,7 @@ class ImageLoader private constructor(context: Context) {
 
 
     fun releaseResource() {
-
+        mUiHandler.removeCallbacksAndMessages("")
+        mContext = null
     }
 }
